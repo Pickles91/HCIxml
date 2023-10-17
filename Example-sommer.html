@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+       body {
+        background-image: url('../catfish1.jpeg');
+        background-size: cover;
+        font-size: xx-large;
+       }
+
+       h1,p {
+        color:aqua;
+        margin: 50px;
+       }
+
+       button {
+        background-image: linear-gradient(#42A1EC, #0070C9);
+        border: 1px solid #0077CC;
+        border-radius: 4px;
+        box-sizing: border-box;
+        color: whitesmoke;
+        margin: 50px;
+        cursor: pointer;
+        direction: ltr;
+        display: block;
+        font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        letter-spacing: -.022em;
+        line-height: 1.47059;
+        min-width: 30px;
+        overflow: visible;
+        padding: 4px 15px;
+        text-align: center;
+    }
+
+    img {
+        margin-left: 50px;
+    }
+
+    </style>
+
+    <script>
+        function consoleOutput() {
+            console.log("Matt likes catfish stew!!");
+        }
+
+        function alertOutput() {
+            alert("Seals go 'arf arf arf !!'");
+        }
+
+        function alterHTML() {
+            document.getElementById("headerHTML").innerHTML = "Catfish!!!!!";
+        }
+
+        function loadXMLDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    myParser(this);
+                }};
+                xhttp.open("GET", "1.xml", true);
+                xhttp.send(); 
+        }
+
+        function myParser(xmlObj) {
+            xmlDoc = xmlObj.responseXML;
+            // console.log(xmlDoc);
+            txt = '';
+            x = xmlDoc.getElementsByTagName("ThemeEntityAbridgedData");
+
+            for (var tree of x) {
+                txt += '<img src="' + tree.childNodes[0].innerHTML + '" class="imageSize">\n' + "<br>";
+
+                if (tree.childNodes[1].innerHTML == "Merrill Magnolia") {
+                     var magnoliaImg = '<img src="' + tree.childNodes[0].innerHTML + '">\n';
+                }
+            }
+
+            if (document.getElementById("treeList").innerHTML == "")
+                document.getElementById("treeList").innerHTML = txt;
+            else
+                document.getElementById("treeList").innerHTML = magnoliaImg;
+
+        }
+
+    </script>
+</head>
+<body>
+<h1 id="headerHTML">Dogfish!</h1>
+
+<!-- This is comment -->
+<p classid="newHTML"></p>
+
+<p>Hello world! Below you will find a button <br> that does absolutely nothing, but ain't it pretty?</p>
+<button onclick="loadXMLDoc()">Click Button for Surprise</button>
+</body>
+
+<div id="treeList"></div>
+<div id="treeImage"></div>
+
+</html>
